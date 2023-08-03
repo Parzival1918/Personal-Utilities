@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "pu-pjr"
+version = "0.1.0"
+description = "Personal utilities for coding"
+authors = ["Pedro Juan Royo <pedro.juan.royo@gmail.com>"]
+readme = "README.md"
+packages = [{include = "pu_pjr"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
