@@ -5,10 +5,10 @@ description = "Personal utilities for coding"
 authors = ["Pedro Juan Royo <pedro.juan.royo@gmail.com>"]
 readme = "README.md"
 packages = [{include = "pu_pjr"}]
+repository = "https://github.com/Parzival1918/Personal-Utilities"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-
 
 [build-system]
 requires = ["poetry-core"]
