@@ -8,7 +8,6 @@ def plot_xy(
         ):
     df = utils.load_data(filename, sep=sep)
     x = df.iloc[:, xcol]
-    print(x[1:5])
     y = df.iloc[:, ycol]
     plt.plot(x, y, **kwargs)
     plt.xlabel("x")
