@@ -46,12 +46,12 @@ jobs:
     
     permissions:
         contents: write
-        
+
     steps:
       - name: Publish PyPi package
         uses: code-specialist/pypi-poetry-publish@v1.2
         with:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_REGISTRY_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
-          PUBLISH_REGISTRY: "https://test.pypi.org/simple/"
+          PUBLISH_REGISTRY: "https://test.pypi.org/legacy/"
     
