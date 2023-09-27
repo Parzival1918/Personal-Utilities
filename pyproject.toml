@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pu-pjr"
-version = "0.5.0"
+version = "0.6.0"
 description = "Personal utilities for coding and data analysis"
 authors = ["Pedro Juan Royo <pedro.juan.royo@gmail.com>"]
 readme = "README.md"
