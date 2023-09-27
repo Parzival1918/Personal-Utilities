@@ -22,4 +22,4 @@ jobs:
       - name: Lint with Ruff  
         run: |  
           pip install ruff  
-          ruff --format=github --target-version=py311 . 
+          ruff --output-format=github --target-version=py311 . 
