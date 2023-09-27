@@ -43,15 +43,43 @@ jobs:
     needs: build
 
     runs-on: ubuntu-latest
-    
-    permissions:
-        contents: write
+
+    strategy:
+      matrix:
+        python-version: [3.11]
+        poetry-version: [1.5.1]
 
     steps:
-      - name: Publish PyPi package
-        uses: code-specialist/pypi-poetry-publish@v1
+      - uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
         with:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_REGISTRY_PASSWORD: ${{ secrets.TEST_PYPI_TOKEN }}
-          PUBLISH_REGISTRY: "https://test.pypi.org/legacy/"
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install poetry ${{ matrix.poetry-version }}
+        run: |
+          python -m ensurepip
+          python -m pip install --upgrade pip
+          python -m pip install poetry==${{ matrix.poetry-version }}
+
+      - name: Install dependencies
+        shell: bash
+        run: python -m poetry install
+
+      - name: Publish to test PyPi package
+        env:
+          PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
+        run: |
+          python -m poetry config repositories.testpypi https://test.pypi.org/legacy/
+          python -m poetry config http-basic.testpypi __token__ $PYPI_TOKEN
+          python -m poetry publish --build
+
+      # - name: Publish to PyPi package
+      #   env:
+      #     PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+      #   run: |
+      #     python -m poetry config http-basic.pypi __token__ $PYPI_TOKEN
+      #     python -m poetry publish --build
+          
     
