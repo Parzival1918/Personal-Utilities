@@ -15,4 +15,5 @@ def plot_xy(
     plt.title(filename)
     plt.grid()
     plt.show(block=not testing)
+    
     return
