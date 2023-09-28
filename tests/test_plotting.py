@@ -13,6 +13,6 @@ def test_load_data():
     assert df.shape == (1000, 3)
 
 def test_violin_plot():
-    stats.violin_plot('tests/test_files/energy.dat', testing=False)
-    # stats.violin_plot('tests/test_files/energy.dat', testing=False, col=2)
+    stats.violin_plot('tests/test_files/energy.dat', testing=True)
+    stats.violin_plot('tests/test_files/energy.dat', testing=True, col=2)
     return
