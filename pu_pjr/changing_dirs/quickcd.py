@@ -55,10 +55,17 @@ def remove_entry(name: str) -> bool:
     with open(saves_file, 'r') as f:
         lines = f.readlines()
 
+    found = False
     with open(saves_file, 'w') as f:
         for line in lines:
             if line.split(',')[0] != name:
                 f.write(line)
+            else:
+                found = True
+
+    if not found:
+        return False
+    
     return True
 
 # function that changes the current working directory to the path of the entry

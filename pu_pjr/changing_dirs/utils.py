@@ -1,5 +1,4 @@
 import os
-# import sys
 
 # Get the home directory
 def get_home_dir() -> str:
@@ -14,6 +13,7 @@ def get_cwd() -> str:
 # Change the current working directory
 def change_cwd(path: str):
     os.chdir(path)
+    os.system('exec zsh') # Create a new shell to update the prompt
     return
 
 # Check if the home directory has a .quickcd/ directory
