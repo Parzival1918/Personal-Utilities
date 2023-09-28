@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pu-pjr"
-version = "0.7.0"
+version = "0.8.0"
 description = "Personal utilities for coding and data analysis"
 authors = ["Pedro Juan Royo <pedro.juan.royo@gmail.com>"]
 readme = "README.md"
@@ -17,7 +17,6 @@ pytest = "^7.4.2"
 
 [tool.poetry.scripts]
 quickplot = "pu_pjr.plotting.__main__:main"
-quickcd = "pu_pjr.changing_dirs.__main__:main"
 
 [build-system]
 requires = ["poetry-core"]
