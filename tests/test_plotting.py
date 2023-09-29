@@ -33,9 +33,14 @@ def test_violin_plot():
 def test_parse_math_expression():
     d = utils.parse_math_expression('+|2, -|3')
     assert d[0] == ('+', 2)
-    assert d[1] == ('m', 3)
+    assert d[1] == ('-', 3)
     d = utils.parse_math_expression('+|2, -|MIN')
     assert d[0] == ('+', 2)
     assert d[1] == ('-', "MIN")
     with pytest.raises(ValueError):
         utils.parse_math_expression('&|2, *|3')
+
+def test_load_many_data():
+    dfs = utils.load_many_data('energy_*.dat', dir='tests/test_files/')
+    assert dfs[0].shape == (1000, 4)
+    assert len(dfs) == 3
