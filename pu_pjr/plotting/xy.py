@@ -35,7 +35,7 @@ def plot_xy(
         plt.plot(x, y, line_type, label=f"Col: {ycol}", **kwargs)
 
     plt.legend()
-    plt.title(filename)
+    plt.title(f"{filename} xcol: {xcol} ycol: {ycol}")
     plt.grid()
     plt.show(block=not testing)
     

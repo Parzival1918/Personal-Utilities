@@ -23,7 +23,7 @@ class MathTypes(Enum):
     DIV = "/"
     POW = "^"
 
-SPECIAL_VALS = ["MAX", "MIN", "MEAN", "STD"]
+SPECIAL_VALS = ["MAX", "MIN", "MEAN", "STD", "AVG"]
 
 # Load to a pandas dataframe from a file
 def load_data(filename: str, sep: str=' ', comment: str='#'):
@@ -37,6 +37,9 @@ def load_many_data(pattern: str, dir: str = "./", sep: str=' ', comment: str='#'
     os.chdir(dir)
 
     filenames = glob.glob(pattern)
+    # Sort the filenames
+    filenames.sort()
+
     dfs = []
     for filename in filenames:
         df = load_data(filename, sep=sep, comment=comment)
