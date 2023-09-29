@@ -13,7 +13,7 @@ def violin_plot(
 
         plt.violinplot(data, showmedians=True, **kwargs)
         plt.xlabel(f"Column: {col}")
-        plt.ylabel("y")
+        # plt.ylabel("y")
         plt.title(filename)
         plt.grid(axis='y') # Grid lines only on y-axis
         plt.show(block=not testing)
@@ -30,7 +30,7 @@ def violin_plot(
             data = df.iloc[:, i]
             axes[i].violinplot(data, showmedians=True, **kwargs)
             axes[i].set_xlabel(f"Column: {i}")
-            axes[i].set_ylabel("y")
+            # axes[i].set_ylabel("y")
             axes[i].grid(axis='y')
 
         plt.suptitle(filename)

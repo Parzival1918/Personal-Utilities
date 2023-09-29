@@ -365,6 +365,37 @@ files = [
 ]
 
 [[package]]
+name = "ovito"
+version = "3.9.2"
+description = "A scientific data visualization and analysis software for particle-based simulations"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "ovito-3.9.2-cp310-cp310-macosx_10_15_universal2.whl", hash = "sha256:77a9d1519078e919ac0c522ec4ab79fba4a9c2de420316b0985764d08eaaa434"},
+    {file = "ovito-3.9.2-cp310-cp310-macosx_13_0_arm64.whl", hash = "sha256:489ab3f69a32708cb0b5196276092e624787e2d735d7395160171301a522f9c9"},
+    {file = "ovito-3.9.2-cp310-cp310-manylinux1_x86_64.whl", hash = "sha256:fc151907607f3f599680b3dade242725cac5ac17d4d9a311f1ca92200475df96"},
+    {file = "ovito-3.9.2-cp310-cp310-win_amd64.whl", hash = "sha256:7dd86c06c6be47b421ca804472a9f8bf67852a283bd4052aca6930d6321190ac"},
+    {file = "ovito-3.9.2-cp311-cp311-macosx_10_15_universal2.whl", hash = "sha256:36e0cc0e4e77584b971af4c0e8b4c8519c7778067958a5898505c98d5a43b064"},
+    {file = "ovito-3.9.2-cp311-cp311-macosx_13_0_arm64.whl", hash = "sha256:2082dc55f340758506ae02b9c70ce66c1350c08c2329eb016aa76c8aba5ba1b9"},
+    {file = "ovito-3.9.2-cp311-cp311-manylinux1_x86_64.whl", hash = "sha256:056fcaeeb0ab0bba62de5a05217f7bea65ffe681474abbbbaf5a35ee0eb49966"},
+    {file = "ovito-3.9.2-cp311-cp311-win_amd64.whl", hash = "sha256:9f0cd6f147bfcf2de07b2659909378f47d4858b485cab135a5c69f3e36eb6aeb"},
+    {file = "ovito-3.9.2-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:6ca510884d057de1ed0e548a219e1ad182e7b8ee0b44d89e2d415ba63145aabd"},
+    {file = "ovito-3.9.2-cp37-cp37m-win_amd64.whl", hash = "sha256:92d1caba99a14f1b46076a63fafefe4236761c66427b050477aae3e2700d63b4"},
+    {file = "ovito-3.9.2-cp38-cp38-macosx_11_0_universal2.whl", hash = "sha256:5d4da6319f743c41dcb7e27737b9d675214b0529c32789a235a92a77369fb42f"},
+    {file = "ovito-3.9.2-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:8c702c2b068e951db4804162dd4d6d9d944f7119c659732a067033588e29c4c6"},
+    {file = "ovito-3.9.2-cp38-cp38-win_amd64.whl", hash = "sha256:1a742233fd2af62b4128889d616064b67e1e0118395d721d90895cef8f5933e8"},
+    {file = "ovito-3.9.2-cp39-cp39-macosx_10_15_universal2.whl", hash = "sha256:f8223e516b118686cf5444cf398edf31923606e19a78876bdd8c8c1fafa115b5"},
+    {file = "ovito-3.9.2-cp39-cp39-macosx_13_0_arm64.whl", hash = "sha256:d57bcfa69c33f87dc06aa87bfb95149d0cf0216e209363298d8c4577fed6678d"},
+    {file = "ovito-3.9.2-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:65c868caf96c3344501945846d2fa53ed9ce1f07e2441a55c47007647537398c"},
+    {file = "ovito-3.9.2-cp39-cp39-win_amd64.whl", hash = "sha256:bdea69428340167f7bf72650a5f1efda074e31c4dc12da72c577b4851e31ac88"},
+]
+
+[package.dependencies]
+numpy = "*"
+PySide6 = ">=6.2"
+traits = ">=6.3"
+
+[[package]]
 name = "packaging"
 version = "23.1"
 description = "Core utilities for Python packages"
@@ -536,6 +567,63 @@ files = [
 diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
+name = "pyside6"
+version = "6.5.2"
+description = "Python bindings for the Qt cross-platform application and UI framework"
+optional = false
+python-versions = "<3.12,>=3.7"
+files = [
+    {file = "PySide6-6.5.2-cp37-abi3-macosx_10_9_universal2.whl", hash = "sha256:b509e4d3ffde4a594d70000f881452643c9aaed800bad2959882075c01f72428"},
+    {file = "PySide6-6.5.2-cp37-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:e6d879ca0f8827a7866856fbedd08857e4bd8f9a858dc998dea10d1913e97938"},
+    {file = "PySide6-6.5.2-cp37-abi3-win_amd64.whl", hash = "sha256:0356dc73c138c25b980d716e425801a61d4aa1d9f7811cf8a825499edfd4d1ae"},
+    {file = "PySide6-6.5.2-pp39-pypy39_pp73-macosx_10_9_universal2.whl", hash = "sha256:f0944cb0da34dc3b0bb62c7a20b6618667760eccdaa4262a90ba7f64b19fb783"},
+    {file = "PySide6-6.5.2-pp39-pypy39_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:ca259b4377eb74e4c9cb74a2afb18c37658f0c83dc18229d1f325974739f6df2"},
+    {file = "PySide6-6.5.2-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:ad82cb12f805c5bec7693d6f1c0d6e4ae4b9462eb368a81bc0d3091de8fae76e"},
+]
+
+[package.dependencies]
+PySide6-Addons = "6.5.2"
+PySide6-Essentials = "6.5.2"
+shiboken6 = "6.5.2"
+
+[[package]]
+name = "pyside6-addons"
+version = "6.5.2"
+description = "Python bindings for the Qt cross-platform application and UI framework (Addons)"
+optional = false
+python-versions = "<3.12,>=3.7"
+files = [
+    {file = "PySide6_Addons-6.5.2-cp37-abi3-macosx_10_9_universal2.whl", hash = "sha256:a31cb7eca2e8cd80332e131124ed9ad197610a2a80eac4f2bd58e9124e38060a"},
+    {file = "PySide6_Addons-6.5.2-cp37-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:bea98d823179b814109dcf3ac6c8a0eddf886570aa9ef8ef09b6bae37bc227ca"},
+    {file = "PySide6_Addons-6.5.2-cp37-abi3-win_amd64.whl", hash = "sha256:c77e06fd511cc8b9292c01724504d6806c33c1f5904bc59f5a8c560a74c15438"},
+    {file = "PySide6_Addons-6.5.2-pp39-pypy39_pp73-macosx_10_9_universal2.whl", hash = "sha256:15bf592e54b3409853c3db23bdb20fb14725b84d50feee862e8b2a3a8a3a0627"},
+    {file = "PySide6_Addons-6.5.2-pp39-pypy39_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:26b55a658fed94a0b3c09927b408663860aca530bf6e83040dcb8fdcc221877d"},
+    {file = "PySide6_Addons-6.5.2-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:793a53b7db32f7780fa9571a14f0bce3700604247127cdb2125b380c577a92eb"},
+]
+
+[package.dependencies]
+PySide6-Essentials = "6.5.2"
+shiboken6 = "6.5.2"
+
+[[package]]
+name = "pyside6-essentials"
+version = "6.5.2"
+description = "Python bindings for the Qt cross-platform application and UI framework (Essentials)"
+optional = false
+python-versions = "<3.12,>=3.7"
+files = [
+    {file = "PySide6_Essentials-6.5.2-cp37-abi3-macosx_10_9_universal2.whl", hash = "sha256:c9606de7afaee57f2c0861cc4b973bd630556dd38ec0d1542560cba81c27ab81"},
+    {file = "PySide6_Essentials-6.5.2-cp37-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:1620e82b38714a1570b142c01694d0415a25526517b24620ff9b00c9f76cfca9"},
+    {file = "PySide6_Essentials-6.5.2-cp37-abi3-win_amd64.whl", hash = "sha256:e67b10f96f0ac5ed24d7e3c4985d37c70550a9dee6f38b127faf5e5341151665"},
+    {file = "PySide6_Essentials-6.5.2-pp39-pypy39_pp73-macosx_10_9_universal2.whl", hash = "sha256:149f1db77d82f35c6a88a403f5297645ebe737df28e163ac4dc402dfa0b961ee"},
+    {file = "PySide6_Essentials-6.5.2-pp39-pypy39_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:4be6ed964cb863823f2788717b9a6ba8f1d94eb3fa2bf1584f4621ab5e021e27"},
+    {file = "PySide6_Essentials-6.5.2-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:6b21cf78b33554f793d409d79b828d9578d34200c86f813ef1b8dac756589b71"},
+]
+
+[package.dependencies]
+shiboken6 = "6.5.2"
+
+[[package]]
 name = "pytest"
 version = "7.4.2"
 description = "pytest: simple powerful testing with Python"
@@ -617,6 +705,21 @@ rich = ["rich"]
 test = ["pytest", "rich", "virtualenv (>20)"]
 
 [[package]]
+name = "shiboken6"
+version = "6.5.2"
+description = "Python/C++ bindings helper module"
+optional = false
+python-versions = "<3.12,>=3.7"
+files = [
+    {file = "shiboken6-6.5.2-cp37-abi3-macosx_10_9_universal2.whl", hash = "sha256:ba7af130d34ea03e329baebd80982d2635aee7e58dbb07a07085509a501ed03f"},
+    {file = "shiboken6-6.5.2-cp37-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:3fbc35ff3c19e7d39433671bfc1be3d7fa9d071bfdd0ffe1c2a4d27acd6cf6a5"},
+    {file = "shiboken6-6.5.2-cp37-abi3-win_amd64.whl", hash = "sha256:558bdb3b0ccc8aac5f9029eabfd6ad8d41f93a87cd7f54395e07732fce39280d"},
+    {file = "shiboken6-6.5.2-pp39-pypy39_pp73-macosx_10_9_universal2.whl", hash = "sha256:4e073b40734a7f9cc6ac289c735362967bb45c34f591f7c0fab7cef1d62e6a66"},
+    {file = "shiboken6-6.5.2-pp39-pypy39_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:cc89759aabafce49b629b189ed7c81986fedaac695714a4eed1aaeb16783c6a9"},
+    {file = "shiboken6-6.5.2-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:e60d8dd3292e3f87662b9e37ae5c558c519f8250da627c473b68bd8d24ed3243"},
+]
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -626,6 +729,70 @@ files = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
     {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
 ]
+
+[[package]]
+name = "traits"
+version = "6.4.2"
+description = "Observable typed attributes for Python classes"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "traits-6.4.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:348fbd56b8c05ebd415dcb5c6c73edfa730144444c40e34af4427f449d4dd922"},
+    {file = "traits-6.4.2-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:23ef1b1d7cd135db1b051f31c5c22ed70e41cd25f77961c56def5fad4e339c71"},
+    {file = "traits-6.4.2-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b175cd1307de814df6e72c30859fcb9126f25ff26ba8400d680f8f17d32ec191"},
+    {file = "traits-6.4.2-cp310-cp310-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:eae0eb6f01b2b287127604e2b3364b717ef504b502b5e369c58f46d62975462a"},
+    {file = "traits-6.4.2-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d7c9561417748e1c0dad5ef091612e11ef4489dd5b76893773c325889d31894c"},
+    {file = "traits-6.4.2-cp310-cp310-musllinux_1_1_aarch64.whl", hash = "sha256:e2ec55ac0b576a10aae98e9d9b89cb6799750b5566e32f635223656835eccf11"},
+    {file = "traits-6.4.2-cp310-cp310-musllinux_1_1_i686.whl", hash = "sha256:54c9b156b52d13f8cefd89dfbd85be03aa1963007a7b1bdcab07dd39df023dd3"},
+    {file = "traits-6.4.2-cp310-cp310-musllinux_1_1_x86_64.whl", hash = "sha256:770688643f4b8e3c8c48b77f11e99d5e00606660a6afd699a0e3474922f695ad"},
+    {file = "traits-6.4.2-cp310-cp310-win32.whl", hash = "sha256:9df3008437e3b394bf8ec87720b173095b56a449bd5fe1e78b8505047499dc6c"},
+    {file = "traits-6.4.2-cp310-cp310-win_amd64.whl", hash = "sha256:cb8797d61e31648a0604199e38fe16bc6c88b9ddeeba69f4b7800a8b2484b6a3"},
+    {file = "traits-6.4.2-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:6ef41e314b99b498b16b034cdd483ab5639058c367362912ae4f9688a1462655"},
+    {file = "traits-6.4.2-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:0eb67f6e51dfb3957db45868aec36a66ecbd00c705bf27a7b89559839c0026ff"},
+    {file = "traits-6.4.2-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:6e339561850fa001ffbc30d9d4e24fa4de26aea473066cabdf8587625844d492"},
+    {file = "traits-6.4.2-cp311-cp311-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:b66f1cbbcdc2e7d2b68506d57f230ad6008ebe2cb4b1528006d7633169b204f0"},
+    {file = "traits-6.4.2-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6ec3c67c900a537fe119a733af277b9d79918a1b975e2a2a46aab5b9d3880dca"},
+    {file = "traits-6.4.2-cp311-cp311-musllinux_1_1_aarch64.whl", hash = "sha256:ef1b1f09f1f3461bdd064ec140a56f70fd6ec087b92bd9eec00a8ec28595b742"},
+    {file = "traits-6.4.2-cp311-cp311-musllinux_1_1_i686.whl", hash = "sha256:2cf7b52c192bde17b2c05bfd43bbab70656548cf966ccf3f01f586aed26f82be"},
+    {file = "traits-6.4.2-cp311-cp311-musllinux_1_1_x86_64.whl", hash = "sha256:f3b1cef635fefe2546efaf91a824d0da1c148940056b22b270a3a5b388db2dc3"},
+    {file = "traits-6.4.2-cp311-cp311-win32.whl", hash = "sha256:9bbee77943ab888ab303d4a874dbb3226f4c1a82a45f86d41e4b22c32c94ab2c"},
+    {file = "traits-6.4.2-cp311-cp311-win_amd64.whl", hash = "sha256:9f2b082820c715612c7154aac3ba86a52e8b4c79dcf0474752d5e3958de242de"},
+    {file = "traits-6.4.2-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:879de4aaf19cb00ce3beff03fc297d266a53275824af4bbd88f02128e5763818"},
+    {file = "traits-6.4.2-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:aa1e6fadd40603d5f2dd3f3f84b274eae934925b28bad10a5ce985563028056d"},
+    {file = "traits-6.4.2-cp37-cp37m-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:3a4d12049e4b90a5d1a7470dc3a46e28c2ebe3f8ef54e470130ca1f9e91b7552"},
+    {file = "traits-6.4.2-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2ac8c4eed0fac8c7b4f6ac3a59490db70fed8f8928ec589737315e0ef7ac14be"},
+    {file = "traits-6.4.2-cp37-cp37m-musllinux_1_1_aarch64.whl", hash = "sha256:d393670685c776c8c0e7dd26b9566361dc0c03997e0799877eacc5f48b996e58"},
+    {file = "traits-6.4.2-cp37-cp37m-musllinux_1_1_i686.whl", hash = "sha256:e23f2631d225627b909322d7f05c7b9b5c3c06b5dea9f6aebf886d7e51aea83b"},
+    {file = "traits-6.4.2-cp37-cp37m-musllinux_1_1_x86_64.whl", hash = "sha256:0eb6b528af4d95f720a76d50114a04aabdd57243ec33088d4ec56009c6a052fd"},
+    {file = "traits-6.4.2-cp37-cp37m-win32.whl", hash = "sha256:45e54214f217efbfc4090cab68346e3ccea4137ebe887c749381b8f0e0182739"},
+    {file = "traits-6.4.2-cp37-cp37m-win_amd64.whl", hash = "sha256:dcb7fedad65c348d661707bb16eb78f0a7fbb5d0446b6526de41d4c0c9991e3d"},
+    {file = "traits-6.4.2-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:3fe1a78ffaf718a541fa0c4149378b37c15255e7cc6f355a7a050c0ad6ccf5c4"},
+    {file = "traits-6.4.2-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:826c97924fafb20fb6617eda6088331d2b368eaca04b68c1dd544140ae39b3a4"},
+    {file = "traits-6.4.2-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c4d3b9bac40bcffe7484897cd2d80d5ed35399cc920792f0f72af13b96aee71e"},
+    {file = "traits-6.4.2-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:a6f907f352151d7015944a2992c797023c2e9ec1549faf1ffd19ad9e63b7ce5c"},
+    {file = "traits-6.4.2-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f263bc6007a6516ebd4707deb2720b6897b7120e15a5b14ac31e4edd20722d73"},
+    {file = "traits-6.4.2-cp38-cp38-musllinux_1_1_aarch64.whl", hash = "sha256:e748ba33ddfb674d0863d2c93ad5cd4b6bf71edb19852f1e6a891d3b7cf3b7de"},
+    {file = "traits-6.4.2-cp38-cp38-musllinux_1_1_i686.whl", hash = "sha256:38d1ce9de88c0ef1255ce3f6d4f6c5e6c9647510ee8a09d9c3b0eb4723c5da23"},
+    {file = "traits-6.4.2-cp38-cp38-musllinux_1_1_x86_64.whl", hash = "sha256:260dd783c2f9f9f596dc2b320e9147c61bef21c59ce2209f41eab5fad47c2956"},
+    {file = "traits-6.4.2-cp38-cp38-win32.whl", hash = "sha256:72ed42f9c6b9b3623bd76ed9717d65c4f224a3dcb7f0e4e16e06e09bdce0901e"},
+    {file = "traits-6.4.2-cp38-cp38-win_amd64.whl", hash = "sha256:41a6cdcbaf484920f3a94cdac09a1ceb889ab932228731e09ac7fd0c604a012e"},
+    {file = "traits-6.4.2-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:c19f8959ecaf9f9b08d27a441dc63942f86a261586cd9cae4b628eba49e72d4e"},
+    {file = "traits-6.4.2-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:56d9c5d1a750f593dc7674fceb0761da750516ee5973e90efe3516d80899806f"},
+    {file = "traits-6.4.2-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:70537b88b022c1aa1e27093771d62decccd523a8c25db42ffea63cf1c7443ee7"},
+    {file = "traits-6.4.2-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:18e0d499ff65d76f6d8fcbf861e5f36daab423c8145c435a2f3c88e4140fc512"},
+    {file = "traits-6.4.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3dd5e01c1086758deeade9a5d4c3f4e1eb1bc32027cb1eac9ca120257987df07"},
+    {file = "traits-6.4.2-cp39-cp39-musllinux_1_1_aarch64.whl", hash = "sha256:9d503d3945aa2706b5bd7dcc79df5e4e46deec2460e3a94ed6c56f8dc1afad91"},
+    {file = "traits-6.4.2-cp39-cp39-musllinux_1_1_i686.whl", hash = "sha256:7dee261c10e084426096b8073a4f524a45fc956628817dc1c683c0402f30efec"},
+    {file = "traits-6.4.2-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:8c98337f688e702dca1aa7fa856994f96a71ce53f2bad9e0e07ebcb8dc3e4b3d"},
+    {file = "traits-6.4.2-cp39-cp39-win32.whl", hash = "sha256:9c4375a597088e4a9ffdc59312ec365c353493aafad582e184d80c865911fbb0"},
+    {file = "traits-6.4.2-cp39-cp39-win_amd64.whl", hash = "sha256:e9a67abe16994b92f55e8dafaca59ef0cb46307265fd2b12439059b8cc3ae691"},
+    {file = "traits-6.4.2.tar.gz", hash = "sha256:5be7cc5fb7a99cba7e9014786373e3ad2f75efb445eeced094654bbaf3b0fa82"},
+]
+
+[package.extras]
+docs = ["Sphinx", "enthought-sphinx-theme", "pygments (<2.15)", "sphinx-copybutton"]
+examples = ["numpy", "pillow"]
+test = ["Cython", "PySide6", "Sphinx", "flake8", "flake8-ets", "mypy", "numpy", "pyface", "pygments (<2.15)", "setuptools", "traitsui"]
 
 [[package]]
 name = "tzdata"
@@ -641,4 +808,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "3.11.x"
-content-hash = "93acc486fb4939922b4240495dfe0ca349a4024d80f8867261588fb76658198f"
+content-hash = "ab43fdb98bd88c16b0ba3c80490a142b70b1cdd1e1e8509b16fc6cab675c2d6e"
