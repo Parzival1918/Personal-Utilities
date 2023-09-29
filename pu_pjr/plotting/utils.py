@@ -45,7 +45,7 @@ def load_many_data(pattern: str, dir: str = "./", sep: str=' ', comment: str='#'
     #Change back to original directory
     os.chdir(original_dir)
   
-    return dfs
+    return dfs, filenames
 
 # Normalise data
 def normalise(df: pd.DataFrame) -> pd.DataFrame:
