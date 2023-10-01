@@ -1,5 +1,7 @@
 import pandas as pd
 from enum import Enum
+import glob
+import os
 
 # Enum types of normalisation
 class Normalisation(Enum):
@@ -27,6 +29,26 @@ SPECIAL_VALS = ["MAX", "MIN", "MEAN", "STD"]
 def load_data(filename: str, sep: str=' ', comment: str='#'):
     df = pd.read_csv(filename, sep=sep, comment=comment, header=None)
     return df
+
+# Load many files into a pandas dataframe from a regex pattern
+def load_many_data(pattern: str, dir: str = "./", sep: str=' ', comment: str='#'):
+    #Change directory
+    original_dir = os.getcwd()
+    os.chdir(dir)
+
+    filenames = glob.glob(pattern)
+    # Sort the filenames
+    filenames.sort()
+
+    dfs = []
+    for filename in filenames:
+        df = load_data(filename, sep=sep, comment=comment)
+        dfs.append(df)
+
+    #Change back to original directory
+    os.chdir(original_dir)
+  
+    return dfs, filenames
 
 # Normalise data
 def normalise(df: pd.DataFrame) -> pd.DataFrame:
