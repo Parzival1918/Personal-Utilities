@@ -4,6 +4,7 @@ from . import utils
 # Plot data from multiple files
 def plot_multifile_xy(
         pattern: str, dir: str = "./", xcol: int = 0, ycol: int=1, sep: str=' ',
+        line_style: str = "-",
         equal_axes: bool = False,
         single_plot: bool = False,
         testing: bool = False, **kwargs
@@ -34,10 +35,10 @@ def plot_multifile_xy(
         x = df.iloc[:, xcol]
         y = df.iloc[:, ycol]
         if single_plot:
-            axes.plot(x, y, label=f"File: {filenames[i]}",**kwargs)
+            axes.plot(x, y, line_style, label=f"File: {filenames[i]}", **kwargs)
             axes.legend()
         else:
-            axes[i].plot(x, y, **kwargs)
+            axes[i].plot(x, y, line_style, **kwargs)
             axes[i].set_xlabel(f"File: {filenames[i]}")
             # axes[i].set_ylabel("y")
             axes[i].grid()

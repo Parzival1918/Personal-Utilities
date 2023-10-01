@@ -13,7 +13,7 @@ def main():
     )
 
     parser.add_argument(
-        "--version", "-v", action="version", version="%(prog)s v0.9.0"
+        "--version", "-v", action="version", version="%(prog)s v0.10.0"
     )
 
     # Sub-parser for the "xy" command
@@ -205,7 +205,8 @@ def main():
             multi_file.plot_multifile_xy(args.pattern, dir=args.dir, xcol=args.xcol, 
                                          ycol=args.ycol, sep=args.separator,
                                          equal_axes=args.equal_axes,
-                                         single_plot=args.single_plot)
+                                         single_plot=args.single_plot,
+                                         line_style=args.line_type)
         except FileNotFoundError as e:
             print(f"FILE NOT FOUND. Filename: {e.filename}")
             exit(1)
