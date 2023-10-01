@@ -23,7 +23,7 @@ class MathTypes(Enum):
     DIV = "/"
     POW = "^"
 
-SPECIAL_VALS = ["MAX", "MIN", "MEAN", "STD", "AVG"]
+SPECIAL_VALS = ["MAX", "MIN", "MEAN", "STD"]
 
 # Load to a pandas dataframe from a file
 def load_data(filename: str, sep: str=' ', comment: str='#'):

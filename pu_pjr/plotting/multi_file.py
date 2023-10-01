@@ -5,6 +5,7 @@ from . import utils
 def plot_multifile_xy(
         pattern: str, dir: str = "./", xcol: int = 0, ycol: int=1, sep: str=' ',
         equal_axes: bool = False,
+        single_plot: bool = False,
         testing: bool = False, **kwargs
         ):
     dfs, filenames = utils.load_many_data(pattern, sep=sep, dir=dir) # Load data
@@ -21,20 +22,28 @@ def plot_multifile_xy(
     n_files = len(dfs)
 
     # Create figure and axes
-    _, axes = plt.subplots(ncols=1, nrows=n_files)#, figsize=(12, 6))
+    if single_plot:
+        fig, axes = plt.subplots(ncols=1, nrows=1)#, figsize=(12, 6))
+    else:
+        fig, axes = plt.subplots(ncols=1, nrows=n_files)#, figsize=(12, 6))
+    # _, axes = plt.subplots(ncols=1, nrows=n_files)#, figsize=(12, 6))
 
     # Plot each file
     for i in range(n_files):
         df = dfs[i]
         x = df.iloc[:, xcol]
         y = df.iloc[:, ycol]
-        axes[i].plot(x, y, **kwargs)
-        axes[i].set_xlabel(f"File: {filenames[i]}")
-        # axes[i].set_ylabel("y")
-        axes[i].grid()
-        if equal_axes:
-            axes[i].set_xlim(x_min, x_max)
-            axes[i].set_ylim(y_min, y_max)
+        if single_plot:
+            axes.plot(x, y, label=f"File: {filenames[i]}",**kwargs)
+            axes.legend()
+        else:
+            axes[i].plot(x, y, **kwargs)
+            axes[i].set_xlabel(f"File: {filenames[i]}")
+            # axes[i].set_ylabel("y")
+            axes[i].grid()
+            if equal_axes:
+                axes[i].set_xlim(x_min, x_max)
+                axes[i].set_ylim(y_min, y_max)
 
     plt.suptitle(pattern)
     plt.show(block=not testing)

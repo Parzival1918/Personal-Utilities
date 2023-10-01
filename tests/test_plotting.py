@@ -67,8 +67,8 @@ def test_plot_multifile_bar():
                                   dir="tests/test_files/")
     multi_file.plot_multifile_bar('energy_*.dat', testing=True, col=2,
                                   dir="tests/test_files/")
-    multi_file.plot_multifile_bar('energy_*.dat', testing=False, col=3,
-                                  dir="tests/test_files/", special_val="STD")
+    multi_file.plot_multifile_bar('energy_*.dat', testing=True, col=3,
+                                  dir="tests/test_files/", special_val="MEAN")
     multi_file.plot_multifile_bar('energy_*.dat', testing=True, col=1,
                                   dir="tests/test_files/", special_val="MEAN")
     multi_file.plot_multifile_bar('energy_*.dat', testing=True, dir="tests/test_files/",
