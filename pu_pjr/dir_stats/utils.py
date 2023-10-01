@@ -33,8 +33,11 @@ def get_dir_files(path: str = './', include_dirs: bool = False): # Exclude file
 
     return files, dirs
 
+def get_file_size(path: str):
+    return os.path.getsize(path)
+
 # Function to return the size of a file in kB, MB, GB, etc.
-def get_file_size(size: int) -> str:
+def transform_file_size(size: int) -> str:
     if size < 1024:
         return "B"
     elif size < 1024**2:

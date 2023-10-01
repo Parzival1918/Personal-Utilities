@@ -3,7 +3,7 @@ from pu_pjr.dir_stats import utils
 def test_get_dir_size():
     size = utils.get_dir_size('tests/test_files/')
     assert size == 123110
-    assert utils.get_file_size(size) == 'kB'
+    assert utils.transform_file_size(size) == 'kB'
 
 def test_get_dir_files():
     files,_ = utils.get_dir_files('tests/test_files/')
