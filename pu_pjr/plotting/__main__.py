@@ -13,7 +13,7 @@ def main():
     )
 
     parser.add_argument(
-        "--version", "-v", action="version", version="%(prog)s v0.10.0"
+        "--version", "-v", action="version", version="%(prog)s v0.11.0"
     )
 
     # Sub-parser for the "xy" command
