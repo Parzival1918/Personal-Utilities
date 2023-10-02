@@ -1,74 +1,92 @@
 import os
+import pathlib
 
-def get_dir_size(path: str = './'): # Exclude files in subdirectories
-    total_size = 0
-    files = os.listdir(path)
-    for f in files:
-        fp = os.path.join(path, f)
-        total_size += os.path.getsize(fp)
+from rich.filesize import decimal
+from rich.markup import escape
+from rich.text import Text
+from rich.tree import Tree
 
-    # for dirpath, dirnames, filenames in os.walk(path):
-    #     for f in filenames:
-    #         fp = os.path.join(dirpath, f)
-    #         total_size += os.path.getsize(fp)
+IGNORED_DIRS = (".git", ".venv", "__pycache__", "node_modules")
+IGNORED_FILES = (".DS_Store", ".gitignore", ".python-version", 
+                 "__init__.py", "__main__.py")
+IGNORE_FILETYPES = (".ignore")
 
-    return total_size
+def format_tree_dir(dir_path: pathlib.Path, is_last_depth: bool) -> Text:
+    """Return a formatted Text directory path to go to the Tree."""
+    contents = os.listdir(dir_path)
 
-def get_dir_files(path: str = './', include_dirs: bool = False): # Exclude files in 
-                                                                 # subdirectories
-    all_files = os.listdir(path)
-    files = []
-    dirs = []
-    for f in all_files:
-        fp = os.path.join(path, f)
-        if os.path.isfile(fp):
-            files.append(f)
-        if include_dirs and os.path.isdir(fp):
-            dirs.append(f)
+    style = "dim" if (dir_path.name.startswith(".") or 
+                      dir_path.name.startswith("__") or
+                      len(contents) == 0) else ""
+    text_str = f"[bold cyan]:open_file_folder: [link file://{dir_path}]{escape(dir_path.name)}"
 
-    # for dirpath, dirnames, filenames in os.walk(path):
-    #     for f in filenames:
-    #         # fp = os.path.join(dirpath, f)
-    #         files.append(f)
+    # Add '...' if is_last_depth and the directory contains a file
+    if is_last_depth:
+        if len(contents) > 0:
+            text_str += "..."
 
-    return files, dirs
+    text = Text(
+        text=text_str,
+        style=style,
+        guide_style=style,
+        overflow="ellipsis",
+        max_length=30,
+    )
+    return text
 
-def get_file_size(path: str):
-    return os.path.getsize(path)
+def format_tree_file(file_path: pathlib.Path) -> Text:
+    """Return a formatted Text file path to go to the Tree."""
+    file_size = decimal(file_path.stat().st_size)
+    icon = "🐍 " if file_path.suffix == ".py" else "📄 "
 
-# Function to return the size of a file in kB, MB, GB, etc.
-def transform_file_size(size: int) -> str:
-    if size < 1024:
-        return "B"
-    elif size < 1024**2:
-        return "kB"
-    elif size < 1024**3:
-        return "MB"
-    elif size < 1024**4:
-        return "GB"
-    elif size < 1024**5:
-        return "TB"
-    else:
-        return "PB"
+    style = "dim" if (file_path.name.startswith(".") or 
+                      file_path.name.startswith("__")) else ""
     
-# Function to get the different file types in a directory and 
-# the number of files of each type
-def get_file_types(files: list[str], ignore_hidden: bool = True) -> dict:
-    file_types = {}
-    file_types['none'] = 0
-    for f in files:
-        if f[0] == '.' and ignore_hidden:
+    text_filename = Text(text=f"{icon} [green]{file_path.name}", style=style)
+    # text_filename.stylize("dim", len(file_path.suffix))
+    text_filename.highlight_regex(r"\.(py|js|html|css|md|txt|json|yml|yaml|toml|c|lmp|cpp|v)$", 
+                                  "bold")
+    text_filename.stylize(f"link file://{file_path}")
+    text_filename.append(f" ({file_size})", "blue")
+
+    return text_filename
+
+def walk_dir(directory: pathlib.Path, tree: Tree, 
+             ignore_files: bool, ignore_dirs: bool, ignore_filetypes: bool,
+             search_depth: int, maximum_depth: int = 3):
+    """Walk a directory and add its contents to a tree."""
+    
+    # Sort dirs first then by filename
+    paths = sorted(
+        pathlib.Path(directory).iterdir(),
+        key=lambda path: (path.is_file(), path.name.lower()),
+    )
+
+    for path in paths:
+        # Skip hidden files
+        if path.name.startswith("."):
             continue
-        elif f[0] == '.' and not ignore_hidden:
-            # count how many '.' are in the filename
-            # if more than 1, it's a hidden file
-            if f.count('.') == 1:
-                file_types['none'] = 1
-                continue
-        
-        f_type = f.split('.')[-1]
-        if f_type in file_types:
-            file_types[f_type] += 1
+
+        # Skip ignored directories
+        if path.is_dir() and ignore_dirs and path.name in IGNORED_DIRS:
+            continue
+
+        # Skip ignored files
+        if path.is_file() and ignore_files and path.name in IGNORED_FILES:
+            continue
+
+        # Skip ignored filetypes
+        if path.is_file() and ignore_filetypes and path.suffix in IGNORE_FILETYPES:
+            continue
+
+        # Do smth if path is a directory
+        if path.is_dir():
+            if search_depth < maximum_depth:
+                child = tree.add(format_tree_dir(path, is_last_depth=False))
+                walk_dir(path, child, ignore_files, ignore_dirs, ignore_filetypes,
+                         search_depth + 1, maximum_depth)
+            else:
+                tree.add(format_tree_dir(path, is_last_depth=True))
+        # Do smth if path is a file
         else:
-            file_types[f_type] = 1
-    return file_types
+            tree.add(format_tree_file(path))
