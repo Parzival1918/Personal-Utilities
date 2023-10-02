@@ -88,8 +88,12 @@ def file_emoji(file_path: pathlib.Path) -> str:
 
 def format_tree_file(file_path: pathlib.Path) -> Text:
     """Return a formatted Text file path to go to the Tree."""
-    file_size = decimal(file_path.stat().st_size)
-    icon = file_emoji(file_path)
+    try:
+        file_size = decimal(file_path.stat().st_size)
+        icon = file_emoji(file_path)
+    except FileNotFoundError:
+        file_size = "???"
+        icon = "⛔️"
 
     style = "dim" if (file_path.name.startswith(".") or 
                       file_path.name.startswith("__")) else ""
@@ -115,7 +119,9 @@ def walk_dir(directory: pathlib.Path, tree: Tree,
             pathlib.Path(directory).iterdir(),
             key=lambda path: (path.is_file(), path.name.lower()),
         )
-    except PermissionError:
+    except PermissionError as e:
+        file_path = pathlib.Path(e.filename)
+        tree.add(format_tree_file(file_path))
         return
     
     for path in paths:
