@@ -11,42 +11,95 @@ IGNORED_FILES = (".DS_Store", ".gitignore", ".python-version",
                  "__init__.py", "__main__.py")
 IGNORE_FILETYPES = (".ignore")
 
+def folder_emoji(dir_path: pathlib.Path) -> str:
+    """Return the emoji for a directory."""
+    # if dir_path.name == ".git":
+    #     return "🐙"
+    # elif dir_path.name == ".venv":
+    #     return "🐍"
+    # elif dir_path.name == "__pycache__":
+    #     return "🐍"
+    # elif dir_path.name == "node_modules":
+    #     return "📦"
+    # else:
+    try:
+        contents = os.listdir(dir_path)
+    except PermissionError:
+        return "⛔️"
+    
+    if len(contents) == 0:
+        return "📁"
+    else:
+        return "📂"
+
 def format_tree_dir(dir_path: pathlib.Path, is_last_depth: bool) -> Text:
     """Return a formatted Text directory path to go to the Tree."""
-    contents = os.listdir(dir_path)
-
-    style = "dim" if (dir_path.name.startswith(".") or 
-                      dir_path.name.startswith("__") or
-                      len(contents) == 0) else ""
-    text_str = f"[bold cyan]:open_file_folder: [link file://{dir_path}]{escape(dir_path.name)}"
+    try:
+        contents = os.listdir(dir_path)
+    except PermissionError:
+        contents = []
+        style = "bold red"
+        text_str = f"{folder_emoji(dir_path=dir_path)} {escape(dir_path.name)}"
+    else:
+        style = "dim cyan" if (dir_path.name.startswith(".") or 
+                        dir_path.name.startswith("__") or
+                        len(contents) == 0) else "cyan"
+        text_str = f"{folder_emoji(dir_path=dir_path)} {escape(dir_path.name)}"
 
     # Add '...' if is_last_depth and the directory contains a file
+    # end_index = len(text_str)
     if is_last_depth:
         if len(contents) > 0:
-            text_str += "..."
+            text_str += " (...)"
+            # end_index = len(text_str) - 6
 
     text = Text(
         text=text_str,
         style=style,
-        guide_style=style,
-        overflow="ellipsis",
-        max_length=30,
+        # overflow="ellipsis",
     )
+    # text.stylize(f"link file://{dir_path}", start=2, end=end_index)
     return text
+
+def file_emoji(file_path: pathlib.Path) -> str:
+    """Return the emoji for a file."""
+    if file_path.suffix == ".py":
+        return "🐍"
+    elif file_path.suffix == ".md":
+        return "📝"
+    elif file_path.suffix == ".txt":
+        return "📄"
+    elif file_path.suffix == ".json":
+        return "📝"
+    elif file_path.suffix == ".yml":
+        return "📝"
+    elif file_path.suffix == ".toml":
+        return "📝"
+    elif file_path.suffix == ".c":
+        return "📝"
+    elif file_path.suffix == ".cpp":
+        return "📝"
+    elif file_path.suffix == ".v":
+        return "📝"
+    elif file_path.suffix == ".lmp":
+        return "⚛️ "
+    else:
+        return "📄"
 
 def format_tree_file(file_path: pathlib.Path) -> Text:
     """Return a formatted Text file path to go to the Tree."""
     file_size = decimal(file_path.stat().st_size)
-    icon = "🐍 " if file_path.suffix == ".py" else "📄 "
+    icon = file_emoji(file_path)
 
     style = "dim" if (file_path.name.startswith(".") or 
                       file_path.name.startswith("__")) else ""
     
-    text_filename = Text(text=f"{icon} [green]{file_path.name}", style=style)
+    text_filename = Text(text=f"{icon} ", style=style)
+    text_filename.append(f"{escape(file_path.name)}", style="green")
     # text_filename.stylize("dim", len(file_path.suffix))
     text_filename.highlight_regex(r"\.(py|js|html|css|md|txt|json|yml|yaml|toml|c|lmp|cpp|v)$", 
                                   "bold")
-    text_filename.stylize(f"link file://{file_path}")
+    # text_filename.stylize(f"link file://{file_path}", start=2)
     text_filename.append(f" ({file_size})", "blue")
 
     return text_filename
@@ -57,11 +110,14 @@ def walk_dir(directory: pathlib.Path, tree: Tree,
     """Walk a directory and add its contents to a tree."""
     
     # Sort dirs first then by filename
-    paths = sorted(
-        pathlib.Path(directory).iterdir(),
-        key=lambda path: (path.is_file(), path.name.lower()),
-    )
-
+    try:
+        paths = sorted(
+            pathlib.Path(directory).iterdir(),
+            key=lambda path: (path.is_file(), path.name.lower()),
+        )
+    except PermissionError:
+        return
+    
     for path in paths:
         # Skip hidden files
         if path.name.startswith("."):
