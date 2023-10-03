@@ -15,7 +15,7 @@ def main():
     parser.set_defaults(which="main")
 
     parser.add_argument(
-        "--version", "-v", action="version", version="%(prog)s v0.16.0"
+        "--version", "-v", action="version", version="%(prog)s v0.17.0"
     )
 
     subparser = parser.add_subparsers(required=True)
@@ -175,49 +175,46 @@ def main():
 
     console = Console()
     if args.which == "tree":
-        with console.status("[bold green]Getting directory contents..."):
-            # Get absolute path
-            path_dir = pathlib.Path(args.directory).resolve()
+        # Get absolute path
+        path_dir = pathlib.Path(args.directory).resolve()
 
-            if not path_dir.exists():
-                console.log(f"Directory {path_dir} does not exist.")
-                exit(1)
+        if not path_dir.exists():
+            console.log(f"Directory {path_dir} does not exist.")
+            exit(1)
 
-            tree = dir_contents.get_dir_contents(dir=path_dir, maximum_depth=args.depth,
-                                                 ignore_hidden_dirs=args.ignore_hidden_dirs,
-                                                 ignore_dirs=args.ignore_dirs_listed,
-                                                 ignore_files=args.ignore_files_listed,
-                                                 ignore_filetypes=args.ignore_filetypes_listed)
-            
-            if args.pager:
-                with console.pager():
-                    console.print(tree)
-            else:
+        tree = dir_contents.get_dir_contents(dir=path_dir, maximum_depth=args.depth,
+                                                ignore_hidden_dirs=args.ignore_hidden_dirs,
+                                                ignore_dirs=args.ignore_dirs_listed,
+                                                ignore_files=args.ignore_files_listed,
+                                                ignore_filetypes=args.ignore_filetypes_listed)
+        
+        if args.pager:
+            with console.pager():
                 console.print(tree)
+        else:
+            console.print(tree)
     elif args.which == "ext":
-        with console.status("[bold green]Searching files..."):
-            # Get absolute path
-            path_dir = pathlib.Path.cwd().resolve()
+        # Get absolute path
+        path_dir = pathlib.Path.cwd().resolve()
 
-            if not path_dir.exists():
-                console.log(f"Directory {path_dir} does not exist.")
-                exit(1)
+        if not path_dir.exists():
+            console.log(f"Directory {path_dir} does not exist.")
+            exit(1)
 
-            dir_contents.find_files_type(path_dir, args.extensions, 0, 
-                                        args.depth, args.abs, args.search_full,
-                                        args.ignore_hidden_dirs)
+        dir_contents.find_files_type(path_dir, args.extensions, 0, 
+                                    args.depth, args.abs, args.search_full,
+                                    args.ignore_hidden_dirs)
     elif args.which == "reg":
-        with console.status("[bold green]Searching files..."):
-            # Get absolute path
-            path_dir = pathlib.Path.cwd().resolve()
+        # Get absolute path
+        path_dir = pathlib.Path.cwd().resolve()
 
-            if not path_dir.exists():
-                console.log(f"Directory {path_dir} does not exist.")
-                exit(1)
+        if not path_dir.exists():
+            console.log(f"Directory {path_dir} does not exist.")
+            exit(1)
 
-            dir_contents.find_files_expression(path_dir, args.expression, 0, 
-                                                args.depth, args.abs, args.search_full,
-                                                args.ignore_hidden_dirs)
+        dir_contents.find_files_expression(path_dir, args.expression, 0, 
+                                            args.depth, args.abs, args.search_full,
+                                            args.ignore_hidden_dirs)
     elif args.which == "ignore-show":
         if args.file == "dirs":
             dirs = utils.ignored_dirs_list()
