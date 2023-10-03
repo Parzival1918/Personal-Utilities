@@ -20,6 +20,7 @@ pytest = "^7.4.2"
 [tool.poetry.scripts]
 quickplot = "pu_pjr.plotting.__main__:main"
 dirstats = "pu_pjr.dir_stats.__main__:main"
+fields = "pu_pjr.force_fields_plotting.__main__:main"
 
 [build-system]
 requires = ["poetry-core"]
