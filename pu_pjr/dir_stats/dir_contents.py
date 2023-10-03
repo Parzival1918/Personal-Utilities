@@ -37,7 +37,12 @@ def find_files_type(dir: pathlib.Path,
                     ignore_hidden_dirs: bool = False) -> None:
     """Print all files of a certain type in a directory and subdirectories."""
 
-    paths = pathlib.Path(dir).iterdir()
+    try:
+        paths = pathlib.Path(dir).iterdir()
+    except PermissionError as e:
+        text = Text(f"PERMISSION ERROR. {e.filename}", style="red")
+        print(text)
+        return
 
     for path in paths:
         if path.is_dir():
@@ -77,7 +82,12 @@ def find_files_expression(dir: pathlib.Path,
                           ignore_hidden_dirs: bool = False) -> None:
     """Print all files of a certain type in a directory and subdirectories."""
 
-    paths = pathlib.Path(dir).iterdir()
+    try:
+        paths = pathlib.Path(dir).iterdir()
+    except PermissionError as e:
+        text = Text(f"PERMISSION ERROR. {e.filename}", style="red")
+        print(text)
+        return
 
     for path in paths:
         if path.is_dir():
