@@ -11,9 +11,10 @@ def main():
         prog="quickplot",
         epilog="Created by Pedro Juan Royo @UnstrayCato"
     )
+    parser.set_defaults(which="main")
 
     parser.add_argument(
-        "--version", "-v", action="version", version="%(prog)s v0.11.0"
+        "--version", "-v", action="version", version="%(prog)s v0.12.0"
     )
 
     # Sub-parser for the "xy" command
@@ -216,6 +217,8 @@ def main():
         except ValueError as e:
             print(f"VALUE ERROR. {e.args[0]}")
             exit(3)
+    else:
+        parser.print_help()
 
 if __name__ == "__main__":
     main()
