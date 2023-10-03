@@ -5,11 +5,99 @@ from rich.filesize import decimal
 from rich.markup import escape
 from rich.text import Text
 from rich.tree import Tree
+from rich import print
 
-IGNORED_DIRS = (".git", ".venv", "__pycache__", "node_modules")
-IGNORED_FILES = (".DS_Store", ".gitignore", ".python-version", 
-                 "__init__.py", "__main__.py")
-IGNORE_FILETYPES = (".ignore")
+ALLOWED_FILENAMES = ["dirs", "files", "filetypes"]
+
+IGNORED_DIRS = [".git", ".venv", "__pycache__", "node_modules"]
+IGNORED_FILES = [".DS_Store", ".gitignore", ".python-version", 
+                 "__init__.py", "__main__.py"]
+IGNORE_FILETYPES = [".ignore", ".pyc"]
+
+IMG_FILETYPES = (".png", ".jpg", ".jpeg", ".gif", ".svg", ".bmp")
+
+FILE_PATH = pathlib.Path("/Users/parzival1918/.dirstats")
+
+def read_from_file(file_name: str) -> list[str]:
+    """Read a list of strings from a file."""
+    # Check if file_name is allowed
+    if file_name not in ALLOWED_FILENAMES:
+        raise ValueError(f"File name {file_name} is not allowed.")
+    
+    # Check if file exists
+    if not (FILE_PATH / file_name).exists():
+        # Create directory if it doesn't exist
+        if not FILE_PATH.exists():
+            print("Creating directory /Users/parzival1918/.dirstats")
+            FILE_PATH.mkdir()
+
+        # Create file
+        with open(FILE_PATH / file_name, "w") as f:
+            # Write the default values
+            if file_name == "dirs":
+                f.write("\n".join(IGNORED_DIRS))
+            elif file_name == "files":
+                f.write("\n".join(IGNORED_FILES))
+            elif file_name == "filetypes":
+                f.write("\n".join(IGNORE_FILETYPES))
+
+    with open(FILE_PATH / file_name, "r") as f:
+        return [line.strip() for line in f.readlines()]
+    
+def ignored_dirs_list() -> list[str]:
+    """Return a list of ignored directories."""
+    return read_from_file("dirs")
+
+def ignored_files_list() -> list[str]:
+    """Return a list of ignored files."""
+    return read_from_file("files")
+
+def ignored_filetypes_list() -> list[str]:
+    """Return a list of ignored filetypes."""
+    return read_from_file("filetypes")
+
+def add_to_file(file_name: str, items: list[str]) -> None:
+    """Add items to a file."""
+    items_already_in_file = read_from_file(file_name)
+    items_to_add = []
+    for item in items:
+        if item not in items_already_in_file:
+            items_to_add.append(item)
+        else:
+            text = Text(f"{item} already in {file_name}.", style="bold yellow")
+            print(text)
+
+    if len(items_to_add) > 0:
+        with open(FILE_PATH / file_name, "a") as f:
+            f.write("\n")
+            f.write("\n".join(items_to_add))
+    
+    text = Text(f"Added {len(items_to_add)} items to {file_name}.", style="green")
+    if len(items_to_add) > 0:
+        text.append(f" {items_to_add}", style="bold green")
+    print(text)
+
+def remove_from_file(file_name: str, items: list[str]) -> None:
+    """Remove items from a file."""
+    items_already_in_file = read_from_file(file_name)
+    items_to_remove = []
+    for item in items:
+        if item in items_already_in_file:
+            items_to_remove.append(item)
+        else:
+            text = Text(f"{item} not in {file_name}.", style="bold yellow")
+            print(text)
+
+    if len(items_to_remove) > 0:
+        with open(FILE_PATH / file_name, "w") as f:
+            f.write("\n".join([item for item in items_already_in_file 
+                               if item not in items_to_remove]))
+    
+    text = Text(f"Removed {len(items_to_remove)} items from {file_name}.", 
+                style="green")
+    if len(items_to_remove) > 0:
+        text.append(f" {items_to_remove}", style="bold green")
+    print(text)
 
 def folder_emoji(dir_path: pathlib.Path) -> str:
     """Return the emoji for a directory."""
@@ -83,6 +171,16 @@ def file_emoji(file_path: pathlib.Path) -> str:
         return "📝"
     elif file_path.suffix == ".lmp":
         return "⚛️ "
+    elif file_path.suffix == ".data":
+        return "📊"
+    elif file_path.suffix == ".xy":
+        return "📈"
+    elif file_path.suffix in IMG_FILETYPES:
+        return "🖼"
+    elif file_path.suffix == ".pdf":
+        return "📑"
+    elif file_path.suffix == ".html":
+        return "🕸️"
     else:
         return "📄"
 
@@ -110,6 +208,7 @@ def format_tree_file(file_path: pathlib.Path) -> Text:
 
 def walk_dir(directory: pathlib.Path, tree: Tree, 
              ignore_files: bool, ignore_dirs: bool, ignore_filetypes: bool,
+             ignore_hidden_dirs: bool,
              search_depth: int, maximum_depth: int = 3):
     """Walk a directory and add its contents to a tree."""
     
@@ -126,19 +225,20 @@ def walk_dir(directory: pathlib.Path, tree: Tree,
     
     for path in paths:
         # Skip hidden files
-        if path.name.startswith("."):
+        if path.name.startswith(".") and ignore_hidden_dirs:
             continue
 
         # Skip ignored directories
-        if path.is_dir() and ignore_dirs and path.name in IGNORED_DIRS:
+        if path.is_dir() and ignore_dirs and path.name in ignored_dirs_list():
             continue
 
         # Skip ignored files
-        if path.is_file() and ignore_files and path.name in IGNORED_FILES:
+        if path.is_file() and ignore_files and path.name in ignored_files_list():
             continue
 
         # Skip ignored filetypes
-        if path.is_file() and ignore_filetypes and path.suffix in IGNORE_FILETYPES:
+        if path.is_file() and ignore_filetypes and \
+            path.suffix in ignored_filetypes_list():
             continue
 
         # Do smth if path is a directory
@@ -146,6 +246,7 @@ def walk_dir(directory: pathlib.Path, tree: Tree,
             if search_depth < maximum_depth:
                 child = tree.add(format_tree_dir(path, is_last_depth=False))
                 walk_dir(path, child, ignore_files, ignore_dirs, ignore_filetypes,
+                         ignore_hidden_dirs,
                          search_depth + 1, maximum_depth)
             else:
                 tree.add(format_tree_dir(path, is_last_depth=True))

@@ -14,3 +14,8 @@
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/pu-pjr)
 
 </div>
+
+Available utilities:
+
+* **quickplot**: A quick plotting utility for 2D data using matplotlib.
+* **dirstats**: A cli to find and show files in dirs.

@@ -15,11 +15,11 @@ def main():
     parser.set_defaults(which="main")
 
     parser.add_argument(
-        "--version", "-v", action="version", version="%(prog)s v0.13.0"
+        "--version", "-v", action="version", version="%(prog)s v0.14.0"
     )
 
     # Sub-parser for the "xy" command
-    subparser = parser.add_subparsers()
+    subparser = parser.add_subparsers(required=True)
     plot_xy_parser = subparser.add_parser(
         "xy", help="Plot x-y data",
         epilog="Created by Pedro Juan Royo @UnstrayCato"
