@@ -1,4 +1,5 @@
 import argparse
+from rich.console import Console
 
 from . import utils
 from . import xy
@@ -14,7 +15,7 @@ def main():
     parser.set_defaults(which="main")
 
     parser.add_argument(
-        "--version", "-v", action="version", version="%(prog)s v0.12.0"
+        "--version", "-v", action="version", version="%(prog)s v0.13.0"
     )
 
     # Sub-parser for the "xy" command
@@ -159,14 +160,16 @@ def main():
 
     args = parser.parse_args()
 
+    console = Console()
     if args.which == "xy":
         math_exp = None if args.math_exp == "#" else args.math_exp
         try:
-            xy.plot_xy(args.filename, plot_all=args.all, xcol=args.xcol, 
-                       ycol=args.ycol, sep=args.separator, line_type=args.line, 
-                       normalise=utils.Normalisation[args.normalise],
-                       mathematical_expression_location=utils.MathLocs[args.math_loc],
-                       mathematical_expression=math_exp)
+            with console.status("[bold green]Plot created"):
+                xy.plot_xy(args.filename, plot_all=args.all, xcol=args.xcol, 
+                        ycol=args.ycol, sep=args.separator, line_type=args.line, 
+                        normalise=utils.Normalisation[args.normalise],
+                        mathematical_expression_location=utils.MathLocs[args.math_loc],
+                        mathematical_expression=math_exp)
         except FileNotFoundError as e:
             print(f"FILE NOT FOUND. Filename: {e.filename}")
             exit(1)
@@ -178,7 +181,8 @@ def main():
             exit(3)
     elif args.which == "stats":
         try:
-            stats.violin_plot(args.filename, args.col)
+            with console.status("[bold green]Plot created"):
+                stats.violin_plot(args.filename, args.col)
         except FileNotFoundError as e:
             print(f"FILE NOT FOUND. Filename: {e.filename}")
             exit(1)
@@ -190,8 +194,9 @@ def main():
             exit(3)
     elif args.which == "multi-bar":
         try:
-            multi_file.plot_multifile_bar(args.pattern, dir=args.dir, col=args.col, 
-                                          special_val=args.special_val)
+            with console.status("[bold green]Plot created"):
+                multi_file.plot_multifile_bar(args.pattern, dir=args.dir, col=args.col, 
+                                            special_val=args.special_val)
         except FileNotFoundError as e:
             print(f"FILE NOT FOUND. Filename: {e.filename}")
             exit(1)
@@ -203,11 +208,12 @@ def main():
             exit(3)
     elif args.which == "multi-xy":
         try:
-            multi_file.plot_multifile_xy(args.pattern, dir=args.dir, xcol=args.xcol, 
-                                         ycol=args.ycol, sep=args.separator,
-                                         equal_axes=args.equal_axes,
-                                         single_plot=args.single_plot,
-                                         line_style=args.line_type)
+            with console.status("[bold green]Plot created"):
+                multi_file.plot_multifile_xy(args.pattern, dir=args.dir, xcol=args.xcol,
+                                            ycol=args.ycol, sep=args.separator,
+                                            equal_axes=args.equal_axes,
+                                            single_plot=args.single_plot,
+                                            line_style=args.line_type)
         except FileNotFoundError as e:
             print(f"FILE NOT FOUND. Filename: {e.filename}")
             exit(1)

@@ -14,7 +14,7 @@ def main():
     parser.set_defaults(which="main")
 
     parser.add_argument(
-        "--version", "-v", action="version", version="%(prog)s v0.12.0"
+        "--version", "-v", action="version", version="%(prog)s v0.13.0"
     )
 
     # Sub-parser for the "tree" command
@@ -88,30 +88,32 @@ def main():
 
     console = Console()
     if args.which == "tree":
-        # Get absolute path
-        path_dir = pathlib.Path(args.directory).resolve()
+        with console.status("[bold green]Getting directory contents..."):
+            # Get absolute path
+            path_dir = pathlib.Path(args.directory).resolve()
 
-        if not path_dir.exists():
-            console.log(f"Directory {path_dir} does not exist.")
-            exit(1)
+            if not path_dir.exists():
+                console.log(f"Directory {path_dir} does not exist.")
+                exit(1)
 
-        tree = dir_contents.get_dir_contents(dir=path_dir, maximum_depth=args.depth)
-        
-        if args.pager:
-            with console.pager():
+            tree = dir_contents.get_dir_contents(dir=path_dir, maximum_depth=args.depth)
+            
+            if args.pager:
+                with console.pager():
+                    console.print(tree)
+            else:
                 console.print(tree)
-        else:
-            console.print(tree)
     elif args.which == "ext":
-        # Get absolute path
-        path_dir = pathlib.Path.cwd().resolve()
+        with console.status("[bold green]Getting directory contents..."):
+            # Get absolute path
+            path_dir = pathlib.Path.cwd().resolve()
 
-        if not path_dir.exists():
-            console.log(f"Directory {path_dir} does not exist.")
-            exit(1)
+            if not path_dir.exists():
+                console.log(f"Directory {path_dir} does not exist.")
+                exit(1)
 
-        dir_contents.find_files_type(path_dir, args.extensions, 0, 
-                                            args.depth, args.abs, args.search_full)
+            dir_contents.find_files_type(path_dir, args.extensions, 0, 
+                                                args.depth, args.abs, args.search_full)
     else:
         parser.print_help()
 
