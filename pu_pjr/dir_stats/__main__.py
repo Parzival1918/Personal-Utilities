@@ -11,9 +11,10 @@ def main():
         prog="dirstats",
         epilog="Created by Pedro Juan Royo @UnstrayCato"
     )
+    parser.set_defaults(which="main")
 
     parser.add_argument(
-        "--version", "-v", action="version", version="%(prog)s v0.11.0"
+        "--version", "-v", action="version", version="%(prog)s v0.12.0"
     )
 
     # Sub-parser for the "tree" command
@@ -111,6 +112,8 @@ def main():
 
         dir_contents.find_files_type(path_dir, args.extensions, 0, 
                                             args.depth, args.abs, args.search_full)
+    else:
+        parser.print_help()
 
 if __name__ == "__main__":
     main()
