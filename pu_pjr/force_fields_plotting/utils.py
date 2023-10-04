@@ -2,7 +2,6 @@ from enum import Enum
 import math
 
 ### Constants ###
-EPSILON_0 = 55.26349406 # e^2*eV^-1*um^-1
 
 class Potentials(Enum):
     lj_cut = 'Lennard-Jones potential with a cut-off. ARGS: epsilon, sigma, cut'
@@ -121,7 +120,7 @@ def buck(
 
     values = []
     for r in points:
-        values.append(A * math.exp(-r/rho) - C / r**6)
+        values.append(A * math.exp(-r/rho) - (C / r**6))
 
     return values
 
@@ -140,9 +139,10 @@ def buck_coul(
 
     values = []
     for r in points:
-        values.append(A * math.exp(-r/rho) - C / r**6 + 
-                      q1*q2/(4*math.pi*EPSILON_0*r))
+        values.append(A * math.exp(-r/rho) - C / r**6 +
+                      q1*q2/(r))
         
-    print(min(values))
+    # print(min(values))
+    # print(max(values))
 
     return values
