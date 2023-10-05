@@ -25,7 +25,7 @@ def create_range(
 ) -> list[float]:
     """Return a float range between 'start' and 'end'"""
     # Check end is bigger than start
-    if start > end:
+    if start >= end:
         raise ValueError("start value is bigger than end value")
     
     # Check that items is bigger than 1
@@ -75,7 +75,7 @@ def check_inputs_non_neg(
 ) -> None:
     """Check that the input is a float and non-negative"""
     if not isinstance(input, float):
-        raise ValueError(f"Input must be a float: {input}")
+        raise TypeError(f"Input must be a float: {input}")
     
     if input < 0:
         raise ValueError(f"Input must be non-negative: {input}")
