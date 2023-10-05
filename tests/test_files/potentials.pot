@@ -1,0 +1,5 @@
+buck_coul A=4545 rho=0.261 C=0 q1=1.939 q2=-0.96 
+buck A=4545 rho=0.26 C=0 
+lj_cut epsilon=1 sigma=0.6 cut=2.7
+lj_cut epsilon=1 sigma=2 cut=4
+lj_cut epsilon=1 sigma=1.5 cut=4.4
