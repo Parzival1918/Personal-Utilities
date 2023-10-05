@@ -14,7 +14,7 @@ def main():
     parser.set_defaults(which="main")
 
     parser.add_argument(
-        "--version", "-v", action="version", version="%(prog)s v0.19.0"
+        "--version", "-v", action="version", version="%(prog)s v0.20.0"
     )
 
     subparsers = parser.add_subparsers(title="subcommands", dest="which")
@@ -162,7 +162,7 @@ def main():
                         console.print(f"⛔️[bold red]VALUE ERROR: [bold yellow]{e}")
                         exit(1)
                     except TypeError as e:
-                        console.print(f"⛔️[bold redTYPE ERROR: [bold yellow]{e}")
+                        console.print(f"⛔️[bold red]TYPE ERROR: [bold yellow]{e}")
                         exit(3)
 
     elif args.which == "list":
