@@ -15,7 +15,7 @@ def main():
     parser.set_defaults(which="main")
 
     parser.add_argument(
-        "--version", "-v", action="version", version="%(prog)s v0.18.0"
+        "--version", "-v", action="version", version="%(prog)s v0.19.0"
     )
 
     subparser = parser.add_subparsers(required=True)

@@ -14,7 +14,7 @@ def main():
     parser.set_defaults(which="main")
 
     parser.add_argument(
-        "--version", "-v", action="version", version="%(prog)s v0.18.0"
+        "--version", "-v", action="version", version="%(prog)s v0.19.0"
     )
 
     subparsers = parser.add_subparsers(title="subcommands", dest="which")
@@ -70,10 +70,10 @@ def main():
         help = "File name to read arguments from, default 'potentials.pot'"
     )
     plot_parser.add_argument(
-        "potential_data", nargs="?",
+        "potential_data", nargs="*",
         #metavar="kwargs",
         help = "Force field data to plot POTENTIAL must be a valid field name and DATA"+
-            "must be valid keyword arguments for the potential."
+            " must be valid keyword arguments for the potential."
     )
 
     args = parser.parse_args()
